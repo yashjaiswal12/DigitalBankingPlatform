@@ -26,4 +26,10 @@
     <ProjectReference Include="..\DigitalBanking.Domain\DigitalBanking.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Identities\" />
+    <Folder Include="Services\" />
+    <Folder Include="Persistence\Migrations\" />
+  </ItemGroup>
+
 </Project>
