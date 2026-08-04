@@ -24,14 +24,14 @@ namespace DigitalBanking.Infrastructure.Repositories
             return await _context.Customers.AnyAsync(x => x.Email.Equals(email), cancellationToken);
         }
 
-        public Task<Customer> GetCustomerByEmailAsync(string email, CancellationToken cancellationToken)
+        public async Task<Customer?> GetCustomerByEmailAsync(string email, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _context.Customers.SingleOrDefaultAsync(x => x.Email.Equals(email), cancellationToken);
         }
 
-        public Task<Customer> GetCustomerByIdAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<Customer?> GetCustomerByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _context.Customers.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
     }
 }

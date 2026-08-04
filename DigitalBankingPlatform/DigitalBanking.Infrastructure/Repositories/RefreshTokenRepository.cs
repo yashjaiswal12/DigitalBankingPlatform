@@ -1,6 +1,7 @@
 ﻿using DigitalBanking.Application.Interfaces.Persistence;
 using DigitalBanking.Domain.Entities;
 using DigitalBanking.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBanking.Infrastructure.Repositories
 {
@@ -13,19 +14,25 @@ namespace DigitalBanking.Infrastructure.Repositories
             _context = context;
         }
 
-        public Task AddTokenAsync(RefreshToken refreshToken, CancellationToken cancellationToken)
+        public async Task AddTokenAsync(RefreshToken refreshToken, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _context.RefreshTokens.AddAsync(refreshToken, cancellationToken);
         }
 
-        public Task<RefreshToken?> GetByRefreshTokenAsync(string token, CancellationToken cancellationToken)
+        public async Task<RefreshToken?> GetByRefreshTokenAsync(string token, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _context.RefreshTokens.SingleOrDefaultAsync(x => x.Token.Equals(token));
         }
 
-        public Task UpdateTokenAsync(RefreshToken refreshToken, CancellationToken cancellationToken)
+        public async Task<bool> GetRefreshTokenByCustomerIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _context.RefreshTokens.AnyAsync(x => x.Id == id, cancellationToken);
+        }
+
+        public Task UpdateTokenAsync(RefreshToken refreshToken)
+        {
+            _context.RefreshTokens.Update(refreshToken);
+            return Task.CompletedTask;
         }
     }
 }

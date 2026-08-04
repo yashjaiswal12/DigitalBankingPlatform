@@ -50,6 +50,11 @@ namespace DigitalBanking.Domain.Entities
             return !IsRevoked && !IsExpired(currentDateTime);
         }
 
+        public static RefreshToken Create(Guid customerId, string token, DateTime expiresOn, DateTime createdOn)
+        {
+            return new RefreshToken(customerId, token, expiresOn, createdOn);
+        }
+
         #endregion
     }
 }

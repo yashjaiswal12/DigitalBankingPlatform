@@ -1,4 +1,5 @@
-﻿using DigitalBanking.Application.Features.Authentication.Commands.RegisterCustomer;
+﻿using DigitalBanking.Application.Features.Authentication.Commands.Login;
+using DigitalBanking.Application.Features.Authentication.Commands.RegisterCustomer;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,13 @@ namespace DigitalBanking.WebAPI.Controllers
 
         [HttpPost("register")]
         public async Task<IActionResult> RegisterCustomer(RegisterCustomerCommand request, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginCustomer(LoginCommand request, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);
             return Ok(response);
