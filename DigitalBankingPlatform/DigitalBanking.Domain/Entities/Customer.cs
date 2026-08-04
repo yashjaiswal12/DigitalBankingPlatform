@@ -1,4 +1,5 @@
 ﻿using DigitalBanking.Domain.Common;
+using System.Runtime.InteropServices;
 
 namespace DigitalBanking.Domain.Entities
 {
@@ -58,6 +59,11 @@ namespace DigitalBanking.Domain.Entities
         public void ChangePassword(string updatedHash)
         {
             PasswordHash = updatedHash;
+        }
+
+        public static Customer Create(string firstName, string lastName, string email, string phoneNumber, string passwordHash)
+        {
+            return new Customer(firstName, lastName, email, phoneNumber, passwordHash);
         }
 
         #endregion

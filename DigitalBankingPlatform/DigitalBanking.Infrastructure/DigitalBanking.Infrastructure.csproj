@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Identities\" />
     <Folder Include="Services\" />
     <Folder Include="Persistence\Migrations\" />
   </ItemGroup>

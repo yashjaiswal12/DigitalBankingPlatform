@@ -1,6 +1,7 @@
 ﻿using DigitalBanking.Application.Interfaces.Persistence;
 using DigitalBanking.Domain.Entities;
 using DigitalBanking.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBanking.Infrastructure.Repositories
 {
@@ -13,14 +14,14 @@ namespace DigitalBanking.Infrastructure.Repositories
             _context = context;
         }
 
-        public Task AddCustomerAsync(Customer customer, CancellationToken cancellationToken)
+        public async Task AddCustomerAsync(Customer customer, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _context.Customers.AddAsync(customer, cancellationToken);
         }
 
-        public Task<bool> CustomerExistsByEmailAsync(string email, CancellationToken cancellationToken)
+        public async Task<bool> CustomerExistsByEmailAsync(string email, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _context.Customers.AnyAsync(x => x.Email.Equals(email), cancellationToken);
         }
 
         public Task<Customer> GetCustomerByEmailAsync(string email, CancellationToken cancellationToken)
